@@ -1,3 +1,4 @@
 <?php
 
-echo "Teste";
+require '../private/init.php';
+
