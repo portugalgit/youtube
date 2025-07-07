@@ -1,17 +1,24 @@
 <?php
 
-//procura todas as classes
-spl_autoload_register(function($className){
 
-    //localização das classes
-    $file = '../private/classes/'. str_replace('\\','/', $className).'.php';
-    if(file_exists($file))
+// Autoload: registra uma função para carregar automaticamente classes
+spl_autoload_register(function($className) {
+
+     // Transforma namespace em caminho de pasta
+    // Exemplo: App\Controllers\Home => App/Controllers/Home.php
+    $file = '../private/classes/' . str_replace('\\', '/', $className) . '.php';
+
+    // Verifica se o arquivo existe
+    if (file_exists($file)) {
         require $file;
-    else
-        echo 'Classe não encontrada: '.$file;
+    }else {
+        // Mensagem de erro caso o arquivo não seja encontrado
+        echo 'Classe não encontrada: ' . $file;
+    }
+
 });
 
-//carrega todos os files
-require 'config.php';
-require 'functions.php';
-require 'routes.php';
+// Carrega arquivos essenciais para iniciar a aplicação
+require 'config.php';     // Configurações (banco, constantes, ambiente, etc.)
+require 'functions.php';  // Funções auxiliares globais
+require 'routes.php';     // Definição das rotas da aplicação
